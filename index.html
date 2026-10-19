@@ -16,146 +16,45 @@ nav{display:flex;gap:18px}nav a{color:#111;text-decoration:none;font-weight:600}
 .container{width:min(1200px,90%);margin:auto}.section{padding:45px 0}.section h2{font-size:30px;margin:0 0 20px}
 .categories{display:flex;gap:10px;flex-wrap:wrap}.category{border:1px solid var(--border);background:#fff;padding:10px 15px;border-radius:999px;cursor:pointer}.category.active{background:#111;color:#fff}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-.card{background:#fff;border:1px solid var(--border);border-radius:17px;overflow:hidden}.photo{height:210px;background:#eee;display:flex;align-items:center;justify-content:center;color:#888;font-weight:600}.info{padding:17px}.tag{font-size:12px;color:#777}.card h3{margin:7px 0}.price{font-size:22px;font-weight:800;margin:10px 0}.buy{width:100%;padding:12px;border:0;border-radius:10px;background:#111;color:#fff;font-weight:700;cursor:pointer}
+.card{background:#fff;border:1px solid var(--border);border-radius:17px;overflow:hidden}.product-img{height:210px;background:#f2f2f2;display:flex;align-items:center;justify-content:center;overflow:hidden}.product-img img{width:100%;height:100%;object-fit:contain;display:block}.info{padding:17px}.tag{font-size:12px;color:#777}.card h3{margin:7px 0}.price{font-size:22px;font-weight:800;margin:10px 0}.stock{font-size:13px;color:#666;margin:6px 0 10px}.buy{width:100%;padding:12px;border:0;border-radius:10px;background:#111;color:#fff;font-weight:700;cursor:pointer}.buy:disabled{background:#bbb;cursor:not-allowed}
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px}.step{background:#fff;border:1px solid var(--border);padding:20px;border-radius:15px}.step b{font-size:24px}
 footer{background:#111;color:#fff;padding:35px 5%;margin-top:20px}.footer-grid{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.muted{color:#aaa}
-.drawer{position:fixed;right:-420px;top:0;width:min(400px,92%);height:100%;background:#fff;z-index:30;box-shadow:-5px 0 25px #0002;padding:22px;transition:.25s;overflow:auto}.drawer.open{right:0}.drawer-head{display:flex;justify-content:space-between;align-items:center}.close{border:0;background:#eee;border-radius:8px;padding:8px;cursor:pointer}.cart-item{border-bottom:1px solid var(--border);padding:13px 0}.cart-row{display:flex;justify-content:space-between;gap:10px}.qty button{border:1px solid var(--border);background:#fff;border-radius:6px;padding:4px 8px}.total{font-size:23px;font-weight:800;margin:20px 0}.checkout{display:block;text-align:center;background:#111;color:#fff;text-decoration:none;padding:14px;border-radius:10px;font-weight:700}
+.drawer{position:fixed;right:-420px;top:0;width:min(400px,92%);height:100%;background:#fff;z-index:30;box-shadow:-5px 0 25px #0002;padding:22px;transition:.25s;overflow:auto}.drawer.open{right:0}.drawer-head{display:flex;justify-content:space-between;align-items:center}.close{border:0;background:#eee;border-radius:8px;padding:8px;cursor:pointer}.cart-item{border-bottom:1px solid var(--border);padding:13px 0}.cart-row{display:flex;justify-content:space-between;gap:10px}.qty button{border:1px solid var(--border);background:#fff;border-radius:6px;padding:4px 8px}.qty button:disabled{opacity:.45;cursor:not-allowed}.total{font-size:23px;font-weight:800;margin:20px 0}.checkout{display:block;text-align:center;background:#111;color:#fff;text-decoration:none;padding:14px;border-radius:10px;font-weight:700}
 .overlay{display:none;position:fixed;inset:0;background:#0005;z-index:20}.overlay.show{display:block}
-@media(max-width:700px){nav{display:none}header{padding:14px 5%}.hero{padding:55px 6%}}
-@media (max-width:700px){...}
-
-.photo img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  display:block;
-}
+@media(max-width:700px){nav{display:none}header{padding:14px 5%}.hero{padding:55px 6%}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.product-img{height:180px}.info{padding:13px}.card h3{font-size:16px}.price{font-size:19px}}
+@media(max-width:430px){.grid{grid-template-columns:1fr}.product-img{height:220px}}
 </style>
 </head>
 <body>
-
 <header>
   <div class="logo">GLOWTECH<small>Tech que marca la diferencia.</small></div>
   <nav><a href="#productos">Productos</a><a href="#como-comprar">Cómo comprar</a></nav>
   <button class="cart" onclick="openCart()">🛒 Carrito (<span id="cartCount">0</span>)</button>
 </header>
-
-<section class="hero">
-  <div class="container">
-    <h1>Tecnología y tendencias, en un solo lugar.</h1>
-    <p>AirPods, cargadores, accesorios y productos seleccionados. Comprá online y coordiná entrega o envío.</p>
-    <a href="#productos">Ver productos</a>
-  </div>
-</section>
-
+<section class="hero"><div class="container"><h1>Tecnología y tendencias, en un solo lugar.</h1><p>AirPods, cargadores, accesorios y productos seleccionados. Comprá online y coordiná entrega o envío.</p><a href="#productos">Ver productos</a></div></section>
 <main class="container">
-<section class="section" id="productos">
-  <h2>Productos</h2>
-  <div class="categories">
-    <button class="category active" onclick="filterProducts('Todos',this)">Todos</button>
-    <button class="category" onclick="filterProducts('Audio',this)">Audio</button>
-    <button class="category" onclick="filterProducts('Cargadores',this)">Cargadores</button>
-    <button class="category" onclick="filterProducts('Accesorios',this)">Accesorios</button>
-  </div>
-  <br>
-  <div class="grid" id="productGrid"></div>
-</section>
-
-<section class="section" id="como-comprar">
-<h2>¿Cómo comprar?</h2>
-<div class="steps">
-  <div class="step"><b>1.</b><h3>Elegí</h3><p>Agregá los productos que quieras al carrito.</p></div>
-  <div class="step"><b>2.</b><h3>Confirmá</h3><p>Revisá tu pedido y tocá comprar por WhatsApp.</p></div>
-  <div class="step"><b>3.</b><h3>Coordinamos</h3><p>Confirmamos disponibilidad, pago y entrega o envío.</p></div>
-</div>
-</section>
+<section class="section" id="productos"><h2>Productos</h2><div class="categories">
+<button class="category active" onclick="filterProducts('Todos',this)">Todos</button><button class="category" onclick="filterProducts('Audio',this)">Audio</button><button class="category" onclick="filterProducts('Cargadores',this)">Cargadores</button><button class="category" onclick="filterProducts('Accesorios',this)">Accesorios</button>
+</div><br><div class="grid" id="productGrid"></div></section>
+<section class="section" id="como-comprar"><h2>¿Cómo comprar?</h2><div class="steps"><div class="step"><b>1.</b><h3>Elegí</h3><p>Agregá los productos que quieras al carrito.</p></div><div class="step"><b>2.</b><h3>Confirmá</h3><p>Revisá tu pedido y tocá comprar por WhatsApp.</p></div><div class="step"><b>3.</b><h3>Coordinamos</h3><p>Confirmamos disponibilidad, pago y entrega o envío.</p></div></div></section>
 </main>
-
-<footer>
-<div class="footer-grid">
-<div><strong>GLOWTECH</strong><p class="muted">Comodoro Rivadavia · Pedidos online</p></div>
-<div><strong>Contacto</strong><p class="muted">WhatsApp · Instagram · Envíos</p></div>
-</div>
-</footer>
-
-<div class="overlay" id="overlay" onclick="closeCart()"></div>
-<aside class="drawer" id="drawer">
-  <div class="drawer-head"><h2>Tu carrito</h2><button class="close" onclick="closeCart()">✕</button></div>
-  <div id="cartItems"></div>
-  <div class="total">Total: <span id="cartTotal">$0</span></div>
-  <a class="checkout" id="whatsappBtn" href="#" target="_blank">Comprar por WhatsApp</a>
-</aside>
-
+<footer><div class="footer-grid"><div><strong>GLOWTECH</strong><p class="muted">Comodoro Rivadavia · Pedidos online</p></div><div><strong>Contacto</strong><p class="muted">WhatsApp · Instagram · Envíos</p></div></div></footer>
+<div class="overlay" id="overlay" onclick="closeCart()"></div><aside class="drawer" id="drawer"><div class="drawer-head"><h2>Tu carrito</h2><button class="close" onclick="closeCart()">✕</button></div><div id="cartItems"></div><div class="total">Total: <span id="cartTotal">$0</span></div><a class="checkout" id="whatsappBtn" href="#" target="_blank">Comprar por WhatsApp</a></aside>
 <script>
-// ===============================
-// EDITÁ TUS PRODUCTOS ACÁ
-// ===============================
-const products = [
-  {id:1,name:"AirPods Pro 2",category:"Audio",price:24000,emoji:"🎧",image:"Airpods Pro 2.jpeg",description:"Auriculares inalámbricos."},
-  {id:2,name:"Cable Lightning para iPhone",category:"Accesorios",price:18000,emoji:"🔌",image:"lightning.jpg",description:"Cable Lightning para iPhone."}
-  {id:3,name:"Cargador USB-C",category:"Cargadores",price:18000,emoji:"⚡",description:"Cargador rápido.",stock:false},
-  {id:4,name:"Battery Pack MagSafe",category:"Accesorios",price:26000,emoji:"🔋",image:"Batery Pack Magsafe.jpg",description:"Batería magnética para iPhone."},
-  {id:5,name:"Stanley 900 ml",category:"Accesorios",price:32000,emoji:"🥤",image:"Stanley 900 ml.jpg",description:"Termo Stanley de 900 ml."},
-  {id:6,name:"Body Splash - Coconut Passion",category:"Accesorios",price:20000,emoji:"🌴",image:"Body Splash.jpg",description:"Body Splash Coconut Passion."},
-  {id:7,name:"Shorts Jordan",category:"Accesorios",price:36000,emoji:"🩳",image:"Shorts Jordam.jpg",description:"Shorts Jordan."}
+const products=[
+{id:1,name:"AirPods Pro 2",category:"Audio",price:24000,emoji:"🎧",image:"Airpods Pro 2.jpeg",description:"Auriculares inalámbricos.",stock:0},
+{id:2,name:"Cable Lightning para iPhone",category:"Accesorios",price:18000,emoji:"🔌",image:"cable lighting.jpg",description:"Cable Lightning para iPhone.",stock:0},
+{id:3,name:"Cargador USB-C",category:"Cargadores",price:18000,emoji:"⚡",image:"WhatsApp Image 2026-10-19 at 03.29.59 (1).jpeg",description:"Cargador rápido.",stock:0},
+{id:4,name:"Battery Pack MagSafe",category:"Accesorios",price:26000,emoji:"🔋",image:"Batery Pack Magsafe.jpg",description:"Batería magnética para iPhone.",stock:0},
+{id:5,name:"Stanley 900 ml",category:"Accesorios",price:32000,emoji:"🥤",image:"Stanley 900 ml.jpg",description:"Termo Stanley de 900 ml.",stock:0},
+{id:6,name:"Body Splash - Coconut Passion",category:"Accesorios",price:20000,emoji:"🌴",image:"Body Splash Cocount Passion.jpg",description:"Body Splash Coconut Passion.",stock:0},
+{id:7,name:"Shorts Jordan",category:"Accesorios",price:36000,emoji:"🩳",image:"Short Jordan.jpg",description:"Shorts Jordan.",stock:0}
 ];
-
-// CAMBIÁ ESTE NÚMERO POR TU WHATSAPP.
-// Formato internacional, sin +, espacios ni guiones.
-const whatsappNumber = "5492974747893";
-
-let cart = [];
-let currentCategory = "Todos";
-
-const money = n => "$" + n.toLocaleString("es-AR");
-
-function renderProducts(){
-  const grid=document.getElementById("productGrid");
-  const list=currentCategory==="Todos"?products:products.filter(p=>p.category===currentCategory);
-  grid.innerHTML=list.map(p=>`
-    <article class="card">
-      <div class="product-img">${p.image ? '<img src="' + p.image + '" alt="' + p.name + '">' : '📦 Foto del producto'}</div>
-      <div class="info">
-        <span class="tag">${p.category}</span>
-        <h3>${p.name}</h3>
-        <p>${p.description}</p>
-        <div class="price">${money(p.price)}</div>
-        <button class="buy" onclick="addToCart(${p.id})">Agregar al carrito</button>
-      </div>
-    </article>`).join("");
-}
-function filterProducts(cat,btn){
-  currentCategory=cat;
-  document.querySelectorAll(".category").forEach(x=>x.classList.remove("active"));
-  btn.classList.add("active"); renderProducts();
-}
-function addToCart(id){
-  const item=cart.find(x=>x.id===id);
-  if(item)item.qty++; else cart.push({id,qty:1});
-  renderCart(); openCart();
-}
-function changeQty(id,delta){
-  const item=cart.find(x=>x.id===id); if(!item)return;
-  item.qty+=delta; if(item.qty<=0)cart=cart.filter(x=>x.id!==id);
-  renderCart();
-}
-function renderCart(){
-  const box=document.getElementById("cartItems");
-  let total=0,count=0;
-  box.innerHTML=cart.length?cart.map(i=>{
-    const p=products.find(x=>x.id===i.id); total+=p.price*i.qty; count+=i.qty;
-    return `<div class="cart-item"><div class="cart-row"><strong>${p.name}</strong><strong>${money(p.price*i.qty)}</strong></div>
-    <div class="qty">Cantidad: <button onclick="changeQty(${p.id},-1)">−</button> ${i.qty} <button onclick="changeQty(${p.id},1)">+</button></div></div>`;
-  }).join(""):"<p>Tu carrito está vacío.</p>";
-  document.getElementById("cartTotal").textContent=money(total);
-  document.getElementById("cartCount").textContent=count;
-  const msg=cart.map(i=>{const p=products.find(x=>x.id===i.id);return `${i.qty}x ${p.name} - ${money(p.price*i.qty)}`}).join("\n");
-  const url="https://wa.me/"+whatsappNumber+"?text="+encodeURIComponent("Hola Glowtech! Quiero comprar:\n"+msg+"\nTotal: "+money(total));
-  document.getElementById("whatsappBtn").href=url;
-}
-function openCart(){document.getElementById("drawer").classList.add("open");document.getElementById("overlay").classList.add("show")}
-function closeCart(){document.getElementById("drawer").classList.remove("open");document.getElementById("overlay").classList.remove("show")}
-renderProducts(); renderCart();
-</script>
-</body>
-</html>
+const whatsappNumber="5492974747893";let cart=[];let currentCategory="Todos";const money=n=>"$"+n.toLocaleString("es-AR");
+function renderProducts(){const grid=document.getElementById("productGrid");const list=currentCategory==="Todos"?products:products.filter(p=>p.category===currentCategory);grid.innerHTML=list.map(p=>`<article class="card"><div class="product-img">${p.image?'<img src="'+p.image+'" alt="'+p.name+'">':'📦 Foto del producto'}</div><div class="info"><span class="tag">${p.category}</span><h3>${p.name}</h3><p>${p.description}</p><div class="price">${money(p.price)}</div><div class="stock">${p.stock>0?'Stock disponible: '+p.stock:'Sin stock'}</div><button class="buy" ${p.stock<=0?'disabled':''} onclick="addToCart(${p.id})">${p.stock>0?'Agregar al carrito':'Sin stock'}</button></div></article>`).join("")}
+function filterProducts(cat,btn){currentCategory=cat;document.querySelectorAll(".category").forEach(x=>x.classList.remove("active"));btn.classList.add("active");renderProducts()}
+function addToCart(id){const p=products.find(x=>x.id===id);if(!p||p.stock<=0)return;const item=cart.find(x=>x.id===id);if(item){if(item.qty>=p.stock)return;item.qty++}else cart.push({id,qty:1});renderCart();renderProducts();openCart()}
+function changeQty(id,delta){const item=cart.find(x=>x.id===id);if(!item)return;const p=products.find(x=>x.id===id);if(delta>0&&item.qty>=p.stock)return;item.qty+=delta;if(item.qty<=0)cart=cart.filter(x=>x.id!==id);renderCart();renderProducts()}
+function renderCart(){const box=document.getElementById("cartItems");let total=0,count=0;box.innerHTML=cart.length?cart.map(i=>{const p=products.find(x=>x.id===i.id);total+=p.price*i.qty;count+=i.qty;return `<div class="cart-item"><div class="cart-row"><strong>${p.name}</strong><strong>${money(p.price*i.qty)}</strong></div><div class="qty">Cantidad: <button onclick="changeQty(${p.id},-1)">−</button> ${i.qty} <button ${i.qty>=p.stock?'disabled':''} onclick="changeQty(${p.id},1)">+</button></div></div>`}).join(""):"<p>Tu carrito está vacío.</p>";document.getElementById("cartTotal").textContent=money(total);document.getElementById("cartCount").textContent=count;const msg=cart.map(i=>{const p=products.find(x=>x.id===i.id);return `${i.qty}x ${p.name} - ${money(p.price*i.qty)}`}).join("\n");const url="https://wa.me/"+whatsappNumber+"?text="+encodeURIComponent("Hola Glowtech! Quiero comprar:\n"+msg+"\nTotal: "+money(total));document.getElementById("whatsappBtn").href=url}
+function openCart(){document.getElementById("drawer").classList.add("open");document.getElementById("overlay").classList.add("show")}function closeCart(){document.getElementById("drawer").classList.remove("open");document.getElementById("overlay").classList.remove("show")}renderProducts();renderCart();
+</script></body></html>
