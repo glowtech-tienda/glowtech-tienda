@@ -48,7 +48,8 @@ const products=[
 {id:4,name:"Battery Pack MagSafe",category:"Accesorios",price:26000,emoji:"🔋",image:"Batery Pack Magsafe.jpg",description:"Batería magnética para iPhone.",stock:2},
 {id:5,name:"Stanley 900 ml",category:"Accesorios",price:32000,emoji:"🥤",image:"Stanley 900 ml.jpg",description:"Termo Stanley de 900 ml.",stock:1},
 {id:6,name:"Body Splash - Coconut Passion",category:"Accesorios",price:20000,emoji:"🌴",image:"Body Splash Cocount Passion.jpg",description:"Body Splash G5 - Coconut Passion.",stock:0},
-{id:7,name:"Shorts Jordan - Rojo",category:"Accesorios",price:36000,emoji:"🩳",image:"Short Jordan.jpg",description:"Shorts Jordan color rojo.",stock:1}
+{id:7,name:"Shorts Jordan - Rojo",category:"Accesorios",price:36000,emoji:"🩳",image:"Short Jordan.jpg",description:"Shorts Jordan color rojo.",stock:1},
+{id:8,name:"Parlante JBL GO 4",category:"Audio",price:30000,emoji:"🔊",image:"JBL GO 4.jpg",description:"Parlante JBL GO 4 portátil. Bluetooth, hasta 7 hs de batería y resistencia IP67.",stock:0}
 ];
 const whatsappNumber="5492974747893";let cart=[];let currentCategory="Todos";const money=n=>"$"+n.toLocaleString("es-AR");
 function renderProducts(){const grid=document.getElementById("productGrid");const list=currentCategory==="Todos"?products:products.filter(p=>p.category===currentCategory);grid.innerHTML=list.map(p=>`<article class="card"><div class="product-img">${p.image?'<img src="'+p.image+'" alt="'+p.name+'">':'📦 Foto del producto'}</div><div class="info"><span class="tag">${p.category}</span><h3>${p.name}</h3><p>${p.description}</p><div class="price">${money(p.price)}</div><div class="stock">${p.stock>0?'Stock disponible: '+p.stock:'Sin stock'}</div><button class="buy" ${p.stock<=0?'disabled':''} onclick="addToCart(${p.id})">${p.stock>0?'Agregar al carrito':'Sin stock'}</button></div></article>`).join("")}
